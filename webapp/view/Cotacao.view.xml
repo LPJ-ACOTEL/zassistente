@@ -1,0 +1,533 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:semantic="sap.m.semantic" xmlns="sap.m" xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout" controllerName="com.assistente.controller.Cotacao">
+	<App>
+		<pages >
+			<Page showNavButton="true" id="page" enableScrolling="true" class="myCustomHeader">
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" press="onBack" class="textLabel2"/>
+						</contentLeft>
+						<contentRight>
+							<Button icon="sap-icon://detail-view" press="onFluxo" class="textLabel2"/>
+							<Button icon="sap-icon://full-screen" press="onPressMenuButton" class="textLabel2" visible="{!device>/isTablet} "/>
+						</contentRight>
+						<contentMiddle >
+							<Title level="H2" text="{i18n>CotacaoTitle}" class="textLabel"/>
+						</contentMiddle>
+					</Bar>
+				</customHeader>
+				<footer>
+					<OverflowToolbar class="sapUiMediumMarginTop">
+
+						<core:Icon src="sap-icon://customer" class="size5 sapUiSmallMarginBegin myCustomIcone"/>
+						<Text id="idUsuario" text="" class="sapUiTinyMarginBegin textLabel4"/>
+						<Text text=":" class="textLabel4"/>
+						<Text id="nomeUsuario" text="" class="sapUiTinyMargin textLabel4"/>
+						<Text text="{i18n>Loja_}" class="textLabel4"/>
+						<Text id="nomeLoja" text="" class="sapUiTinyMargin textLabel4"/>
+						<ToolbarSpacer/>
+						<ToolbarSpacer/>
+						<ToolbarSpacer/>
+						<Button type="Transparent" id="idConfigurar" text="{i18n>configurar}" press="onConfigurar" class="myCustomButton2 sapUiSmallMarginBegin"/>
+						<Button type="Transparent" id="idModificar" text="{i18n>modificar}" press="onModificar" class="myCustomButton2 sapUiSmallMarginBegin"/>
+						<Button type="Transparent" id="idDadosAdicionais" text="{i18n>dadosadicionaiscliente}" press="onDadosAdicionais"
+							class="sapUiSmallMarginBegin myCustomButton2"/>
+						<Button type="Transparent" id="idOK" text="{i18n>salvar} " press="onSalvar" class="myCustomButton2 sapUiSmallMarginBegin"/>
+						<Button type="Transparent" id="idCancelar" text="{i18n>cancelar}" press="onCancelarCotacao" class="myCustomButton2 sapUiSmallMarginBegin"/>
+					
+					</OverflowToolbar>
+				</footer>
+				<content>
+					<VBox direction="Column">
+						<f:Form id="_form01" editable="true">
+							<f:title>
+								<core:Title id="idDadosCotacao" text="{i18n>dadoscotacao}"/>
+							</f:title>
+							<f:layout>
+								<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="12" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0"
+									emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="6" columnsM="6" singleContainerFullSize="true"/>
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>tipocontrato}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idTpCotacao" change="handleChangeAll" valueStateText="{i18n>obrigatorio}" showValueHelp="true"
+													valueHelpRequest=".onSelectDialogPress"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>orgvendas}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idOrgVend" change="handleChangeAll" valueStateText="{i18n>obrigatorio}" showValueHelp="true"
+													valueHelpRequest=".onSelectDialogPress"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>canaldistribuicao}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idCanal" change="handleChangeAll" valueStateText="{i18n>obrigatorio}" showValueHelp="true"
+													valueHelpRequest=".onSelectDialogPress"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>setoratividade}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idSetor" change="handleChangeAll" valueStateText="{i18n>obrigatorio}" showValueHelp="true"
+													valueHelpRequest=".onSelectDialogPress"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>validoate}">
+											<f:fields>
+												<DatePicker class="myCustomIc myCustomBord" id="idValidoAte" valueFormat="dd/MM/yyyy" displayFormat="short" change="handleChange" width="100%"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>escritoriovendas}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idEscritorio" change="handleChangeAll" showValueHelp="true"
+													valueHelpRequest=".onSelectDialogPress"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+							<f:customData>
+								<core:CustomData key="w5g.dt.editable" value="true" id="__data14"/>
+							</f:customData>
+						</f:Form>
+						<f:Form id="_form02" editable="true">
+							<f:title>
+								<core:Title text="{i18n>cabecalho}"/>
+							</f:title>
+							<f:layout>
+								<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="12" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0"
+									emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="6" columnsM="6" singleContainerFullSize="true"/>
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>emissor}">
+											<f:fields>
+												<!--  <Input id="idEmissor" change="handleEmissor"   showValueHelp="true" valueHelpRequest=".onSelectDialogPress"/>
+											-->
+												<Input class="myCustomIc myCustomBord" id="idEmissor" type="Text" placeholder="{i18n>digiteemissor}" width="100%" showSuggestion="true"
+													showValueHelp="true" valueHelpRequest="onSelectDialogPress" submit="onSelectDialogPress" change="handleEmissor" fieldWidth="100%"></Input>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>cnpjcpf}">
+											<f:fields>
+												<Input id="idCNPJ" editable="false"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>recebedormercadoria}">
+											<f:fields>
+												<!-- <Input id="idRecebedor" change="handleRecebedor" showValueHelp="true" valueHelpRequest=".onSelectDialogPress"/>
+												-->
+												<Input class="myCustomIc myCustomBord" id="idRecebedor" type="Text" placeholder="{i18n>digiterecebedor}" width="100%" showSuggestion="true"
+													showValueHelp="true" valueHelpRequest="onSelectDialogPress" submit="onSelectDialogPress" change="handleRecebedor" fieldWidth="100%"></Input>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>numpedido}">
+											<f:fields>
+												<Input id="idPedido"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>formapagamento}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idFormaPag" change="handleChangeAll" showValueHelp="true" valueHelpRequest=".onSelectDialogPress"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>utilizacao}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idUtilizacao" change="handleChangeAll" showValueHelp="true"
+													valueHelpRequest=".onSelectDialogPress"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>vendedor}">
+											<f:fields>
+												<!--	<Input id="idVendedor" change="handleChangeAll" showValueHelp="true" valueHelpRequest=".onSelectDialogPress"/>
+											-->
+												<Input class="myCustomIc myCustomBord" id="idVendedor" type="Text" placeholder="{i18n>digitevendedor}" width="100%" showSuggestion="true"
+													showValueHelp="true" valueHelpRequest="onSelectDialogPress" submit="onSelectDialogPress" change="handleChangeAll" fieldWidth="100%"></Input>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>datapedido}">
+											<f:fields>
+												<DatePicker class="myCustomIc myCustomBord" id="idDataPedido" valueFormat="dd/MM/yyyy" displayFormat="short" change="handleChange"
+													width="100%"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>condicaopagamento}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idCondPag" valueStateText="{i18n>obrigatorio}" change="handleChangeAll" showValueHelp="true"
+													valueHelpRequest=".onSelectDialogPress"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>motivoordem}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idMotivo" change="handleChangeAll" showValueHelp="true" valueHelpRequest=".onSelectDialogPress"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>indicacaocomercial}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idIndicaoComercial" change="handleChangeAll" showValueHelp="true"
+													valueHelpRequest=".onSelectDialogPress"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement id="idBloqueioElement" label="{i18n>bloqueio}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idBloqueio" change="handleChangeAll" showValueHelp="true" valueHelpRequest=".onSelectDialogPress"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+						<f:Form id="_form04" editable="true">
+							<f:title>
+								<core:Title text="{i18n>transporte}"/>
+							</f:title>
+							<f:layout>
+								<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="12" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0"
+									emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="5" columnsM="5" singleContainerFullSize="true"/>
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>incoterms1}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idIncoterms1" valueStateText="{i18n>obrigatorio}" change="handleChangeAll" showValueHelp="true"
+													valueHelpRequest=".onSelectDialogPress"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>incoterms2}">
+											<f:fields>
+												<Input id="idIncoterms2" valueStateText="{i18n>obrigatorio}"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>fretepago}">
+											<f:fields>
+												<CheckBox id="idFrete" text="" selected=""/>
+												<Input id="idFreteValor">
+													<layoutData>
+														<l:GridData span="L9 M3 S4"/>
+													</layoutData>
+												</Input>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>localentrega}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idLocal" change="handleLocal" showValueHelp="true" valueHelpRequest=".onSelectDialogPress"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+					</VBox>
+					<f:Form id="_form03" editable="true">
+						<f:title>
+							<core:Title text="{i18n>itens}"/>
+						</f:title>
+						<f:layout>
+							<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="12" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0"
+								emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="true"/>
+						</f:layout>
+						<f:formContainers>
+							<f:FormContainer>
+								<f:formElements>
+									<f:FormElement>
+										<f:fields>
+											<FlexBox wrap="Wrap" class="sapUiSmallMarginBegin">
+												<FlexBox class="sapUiTinyMarginTop" wrap="Wrap" direction="Column" justifyContent="Center">
+													<Button id="idCalcular" class="" tooltip="Calcular" icon="" press="onCalcular" text="Calcular" type="Emphasized">
+														<layoutData>
+															<FlexItemData growFactor="0"/>
+														</layoutData>
+													</Button>
+												</FlexBox>
+												<FlexBox class="sapUiTinyMarginTop" wrap="Wrap" direction="Column" justifyContent="Center">
+													<Button id="idEstoque" class="sapUiTinyMarginBegin" tooltip="{i18n>estoque}" icon="" press="onEstoque" text="Estoque"
+														type="Emphasized">
+														<layoutData>
+															<FlexItemData growFactor="0"/>
+														</layoutData>
+													</Button>
+												</FlexBox>
+												<FlexBox class="sapUiTinyMarginTop" wrap="Wrap" direction="Column" justifyContent="Center">
+													<Button id="idAdicionar" class="sapUiTinyMarginBegin" tooltip="{i18n>adicionar}" icon="sap-icon://add" press="handleAccept" type="Accept">
+														<layoutData>
+															<FlexItemData growFactor="0"/>
+														</layoutData>
+													</Button>
+												</FlexBox>
+												<FlexBox class="sapUiTinyMarginTop" wrap="Wrap" direction="Column" justifyContent="Center">
+													<Button id="idEliminar" class="sapUiTinyMarginBegin" tooltip="{i18n>eliminar}" icon="sap-icon://negative" press="handleReject" type="Reject">
+														<layoutData>
+															<FlexItemData growFactor="0"/>
+														</layoutData>
+													</Button>
+												</FlexBox>
+												<FlexBox wrap="Wrap" direction="Column" class="sapUiSmallMarginBegin" width="4%">
+													<Label text="{i18n>itens}:" class="textCabLabe"/>
+													<Input id="idCItens" editable="false" class="inputNotFocused1">
+														<layoutData>
+															<FlexItemData growFactor="0"/>
+														</layoutData>
+													</Input>
+												</FlexBox>
+												<FlexBox wrap="Wrap" direction="Column" class="sapUiSmallMarginBegin" width="7%">
+													<Label text="{i18n>peso}:" class="textCabLabe"/>
+													<Input id="idCPeso" editable="false" class="inputNotFocused1">
+														<layoutData>
+															<FlexItemData growFactor="0"/>
+														</layoutData>
+													</Input>
+												</FlexBox>
+												<FlexBox wrap="Wrap" direction="Column" class="sapUiSmallMarginBegin" width="7%">
+													<Label text="{i18n>descR}:" class="textCabLabe"/>
+													<Input id="idCDescR" change="onChangedesc" class="inputNotFocused1">
+														<layoutData>
+															<FlexItemData growFactor="0"/>
+														</layoutData>
+													</Input>
+												</FlexBox>
+												<FlexBox wrap="Wrap" direction="Column" class="sapUiSmallMarginBegin" width="7%">
+													<Label text="{i18n>descP}:" class="textCabLabe"/>
+													<Input id="idCDescP" change="onChangedesc" class="inputNotFocused1">
+														<layoutData>
+															<FlexItemData growFactor="0"/>
+														</layoutData>
+													</Input>
+												</FlexBox>
+												<FlexBox wrap="Wrap" direction="Column" class="sapUiSmallMarginBegin" width="7%">
+													<Label text="{i18n>juros}" class="textCabLabe"/>
+													<Input id="idCJuros" editable="false" class="inputNotFocused1">
+														<layoutData>
+															<FlexItemData growFactor="0"/>
+														</layoutData>
+													</Input>
+												</FlexBox>
+												<FlexBox wrap="Wrap" direction="Column" class="sapUiSmallMarginBegin" width="7%">
+													<Label text="{i18n>icms}" class="textCabLabe"/>
+													<Input id="idCIcms" editable="false" class="inputNotFocused1">
+														<layoutData>
+															<FlexItemData growFactor="0"/>
+														</layoutData>
+													</Input>
+												</FlexBox>
+												<FlexBox wrap="Wrap" direction="Column" class="sapUiSmallMarginBegin" width="7%">
+													<Label text="{i18n>st}" class="textCabLabe"/>
+													<Input id="idCSt" editable="false" class="inputNotFocused1">
+														<layoutData>
+															<FlexItemData growFactor="0"/>
+														</layoutData>
+													</Input>
+												</FlexBox>
+												<FlexBox wrap="Wrap" direction="Column" class="sapUiSmallMarginBegin" width="7%">
+													<Label text="{i18n>ipi}" class="textCabLabe"/>
+													<Input id="idCIpi" editable="false" class="inputNotFocused1">
+														<layoutData>
+															<FlexItemData growFactor="0"/>
+														</layoutData>
+													</Input>
+												</FlexBox>
+												<FlexBox wrap="Wrap" direction="Column" class="sapUiSmallMarginBegin" width="8%">
+													<Label text="{i18n>valortotal}" class="textCabLabe"/>
+													<Input id="idCValor" editable="false" class="inputNotFocused1">
+														<layoutData>
+															<FlexItemData growFactor="0"/>
+														</layoutData>
+													</Input>
+												</FlexBox>
+											</FlexBox>
+										</f:fields>
+									</f:FormElement>
+								</f:formElements>
+							</f:FormContainer>
+							<f:FormContainer>
+								<f:formElements>
+									<f:FormElement>
+										<f:fields>
+											<Table id="idProductsTable" mode="MultiSelect" inset="false" items="{ path: 'ModelItens>/Itens', sorter: { path: 'ModelItens&gt;/Itens' } }">
+												<columns>
+													<Column width="3em">
+														<Text text="{i18n>item}" class="textItens"/>
+													</Column>
+													<Column minScreenWidth="Desktop" demandPopin="true" width="9em">
+														<Text text="{i18n>material}" class="textItens"/>
+													</Column>
+													<Column minScreenWidth="Desktop" demandPopin="true" width="9em">
+														<Text text="{i18n>descricao}" class="textItens"/>
+													</Column>
+													<Column minScreenWidth="Desktop" demandPopin="true" width="6.5em">
+														<Text text="{i18n>centro}" class="textItens"/>
+													</Column>
+													<Column minScreenWidth="Desktop" demandPopin="true" width="5.5em">
+														<Text text="{i18n>motivodrecusa}" class="textItens"/>
+													</Column>
+													<Column minScreenWidth="Desktop" demandPopin="true" width="5em">
+														<Text text="{i18n>qtd}" class="textItens"/>
+													</Column>
+													<Column minScreenWidth="Desktop" demandPopin="true">
+														<Text text="{i18n>um}" class="textItens"/>
+													</Column>
+													<Column minScreenWidth="Desktop" demandPopin="true">
+														<Text text="{i18n>conv}" class="textItens"/>
+													</Column>
+													<Column minScreenWidth="Desktop" demandPopin="true" width="5.5em">
+														<Text text="{i18n>preco}" class="textItens"/>
+													</Column>
+													<Column minScreenWidth="Desktop" demandPopin="true">
+														<Text text="{i18n>descP}" class="textItens"/>
+													</Column>
+													<Column minScreenWidth="Desktop" demandPopin="true">
+														<Text text="{i18n>descR}" class="textItens"/>
+													</Column>
+													<Column minScreenWidth="Desktop" demandPopin="true">
+														<Text text="{i18n>icms}" class="textItens"/>
+													</Column>
+													<Column minScreenWidth="Desktop" demandPopin="true">
+														<Text text="{i18n>st}" class="textItens"/>
+													</Column>
+													<Column minScreenWidth="Desktop" demandPopin="true">
+														<Text text="{i18n>ipi}" class="textItens"/>
+													</Column>
+													
+													<Column minScreenWidth="Desktop" demandPopin="true" width="5em">
+														<Text text="{i18n>valoritem}" class="textItens"/>
+													</Column>
+												</columns>
+												<items>
+													<ColumnListItem vAlign="Middle" class="textItens2" type="Detail" detailPress="onSelectionChange">
+														<cells>
+															<!--<ObjectIdentifier title="{ModelItens>Item}" class="textItens2"/>
+															
+															<Input id="idMaterial" change="handleMaterial" valueStateText="{i18n>obrigatorio}" value="{ModelItens>Material}" showValueHelp="true"
+																valueHelpRequest=".onSelectDialogPress" fieldWidth="{70%}" class="inputNotFocused"/>
+															-->
+															<ObjectAttribute text="{ModelItens>Item}" class="textItens2"/>
+															<Input editable="{ModelItens>isEnabled}" id="idMaterial" class="inputNotFocused myCustomIc myCustomBord" value="{ModelItens>Material}"
+																valueStateText="{i18n>obrigatorio}" type="Text" placeholder="{i18n>digitematerial}" width="100%" showSuggestion="true" showValueHelp="true"
+																valueHelpRequest="onSelectDialogPress" submit="onSelectDialogPress" change="handleMaterial" fieldWidth="{70%}"></Input>
+															<ObjectAttribute id="idDescMaterial" text="{ModelItens>Descricao}" class="textItens2"/>
+															<Input editable="{ModelItens>isEnabled}" id="idCentro" change="handleCentro" valueStateText="{i18n>obrigatorio}" value="{ModelItens>Centro}"
+																showValueHelp="true" valueHelpRequest=".onSelectDialogPress" fieldWidth="{70%}" class="inputNotFocused myCustomIc myCustomBord"/>
+															
+															<Input  id="idMotivoRecusaItem" value="{ModelItens>MotivoRecusaItem}" type="{Text}" fieldWidth="{70%}" class="inputNotFocused myCustomIc myCustomBord" change="handleChangeAll" showValueHelp="true"
+																valueHelpRequest="onSelectDialogPress"/>
+															<Input editable="{ModelItens>isEnabled}" value="{ModelItens>Qtd}" valueStateText="{i18n>obrigatorio}" type="{Text}" fieldWidth="{70%}"
+																class="inputNotFocused" change="onValidaQuantidade"/>
+															<!--<ObjectAttribute text="{ModelItens>UM}" id="idUm" class="textItens2"/>
+															/>-->
+															<Input id="idUm" valueStateText="{i18n>obrigatorio}" value="{ModelItens>UM}" editable="false" fieldWidth="{70%}" class="inputNotFocused"/>
+															<core:Icon src="sap-icon://compare" size="1.5em" id="__icon1" press="onDialogPress"/>
+															<!-- <ObjectNumber number="{ parts:[{path:'ModelItens>Preco'},{path:'ModelItens>CurrencyCode'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }" unit="{ModelItens>CurrencyCode}"/>
+															   
+															<ObjectNumber number="{ path: 'ModelItens>Preco', type: 'sap.ui.model.odata.type.Decimal', constraints: {precision: 11, scale: 2} }"/>
+															/>-->
+															<Input editable="{ModelItens>isEnabled}" id="idPrecoI" change="handleValor" valueStateText="{i18n>obrigatorio}" value="{ModelItens>Preco}"
+																fieldWidth="{70%}" class="inputNotFocused"/>
+															<Input editable="{ModelItens>isEnabled}" id="idDPMateiral" change="onChangedesc" value="{ModelItens>DescPercentual}" fieldWidth="{60%}"
+																class="inputNotFocused"/>
+															<Input editable="{ModelItens>isEnabled}" id="idDRPMateiral" change="onChangedesc" value="{ModelItens>Desconto}" fieldWidth="{60%}"
+																class="inputNotFocused"/>
+															<ObjectAttribute text="{ModelItens>ICMS}%" class="textItens2"/>
+															<ObjectAttribute text="{ModelItens>ST}%" class="textItens2"/>
+															<ObjectAttribute text="{ModelItens>IPI}%" class="textItens2"/>
+															<!--<Input change="limpaItens" editable="{ModelItens>isEnabled}" value="{ModelItens>Comissao}" fieldWidth="{60%}" class="inputNotFocused"/>
+																<ObjectNumber
+																number="{ parts:[{path:'ModelItens>ValorItem'},{path:'ModelItens>CurrencyCode'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+																unit="{ModelItens>CurrencyCode}"/>
+																-->
+															<ObjectAttribute id="idValorItem" text="{ModelItens>ValorItem}" class="textItens2"/>
+														</cells>
+													</ColumnListItem>
+												</items>
+											</Table>
+										</f:fields>
+									</f:FormElement>
+								</f:formElements>
+							</f:FormContainer>
+						</f:formContainers>
+					</f:Form>
+					<FlexBox justifyContent="End"></FlexBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -1,0 +1,50 @@
+<mvc:View controllerName="com.assistente.controller.OrdensCard" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core"
+	xmlns:semantic="sap.m.semantic" xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:c="com.assistente.components">
+	<App>
+		<pages>
+			<Page title="{i18n>vendas}" id="page" enableScrolling="true" showNavButton="false" class="myCustomHeader">
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" press="onBack" class="textLabel2"/>
+						</contentLeft>
+						<contentRight>
+							<Button class="textLabel2" icon="sap-icon://full-screen" press="onPressMenuButton" visible="{!device>/isTablet} "/>
+						</contentRight>
+						<contentMiddle >
+							<Title level="H2" text="{i18n>vendas}" class="textLabel"/>
+						</contentMiddle>
+					</Bar>
+				</customHeader>
+				<content>
+					<FlexBox >
+						<HBox>
+							<!-- Card with custom values: no properties set  -->
+							<c:Card id="card1" title="{i18n>CotacaoTitle}" press="actionCotacao" image="{imageModel>/path}/image/cotacao.png"
+								class="textLabel3 sapUiTinyMargin"></c:Card>
+							<!-- Cards with custom backbrounds and images sets -->
+							<c:Card id="card2" title="{i18n>OrdemVendaTitle}" press="actionOrdem" image="{imageModel>/path}/image/pedido.png"
+								class="textLabel3 sapUiTinyMargin"></c:Card>
+							<c:Card id="card3" title="{i18n>administracotacao}" press="actionAdministrar" image="{imageModel>/path}/image/administracao.png"
+								class="textLabel3 sapUiTinyMargin"></c:Card>
+							<c:Card id="card4" title="{i18n>monitornfe}" press="actionMonitorNfe" image="{imageModel>/path}/image/monitor.png"
+								class="textLabel3 sapUiTinyMargin"></c:Card>
+						</HBox>
+					</FlexBox>
+				</content>
+				<footer >
+					<OverflowToolbar class="sapUiMediumMarginTop">
+		
+						<core:Icon src="sap-icon://customer" class="size5 sapUiSmallMarginBegin myCustomIcone"/>
+						<Text id="idUsuario" text="" class="sapUiTinyMarginBegin textLabel4"/>
+						<Text text=":" class="textLabel4"/>
+						<Text id="nomeUsuario" text="" class="sapUiTinyMargin textLabel4"/>
+						<Text text="{i18n>Loja_}" class="textLabel4"/>
+						<Text id="nomeLoja" text="" class="sapUiTinyMargin textLabel4"/>
+						<ToolbarSpacer/>
+					</OverflowToolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

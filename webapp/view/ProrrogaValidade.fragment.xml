@@ -1,0 +1,19 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog afterClose="dialogProrrogaAfterClose" contentHeight="25%" contentWidth="20%">
+		<content>
+			<FlexBox alignContent="Start" alignItems="Start" class="sapUiSmallMargin">
+				<f:SimpleForm editable="false" layout="ColumnLayout" columnsM="2" columnsL="3" columnsXL="3">
+					<f:content>
+						<Label text="{i18n>novadata}"/>
+						<DatePicker class="myCustomIc myCustomBord" id="idDate" displayFormat="short" change="handleChange" width="100%"/>
+					</f:content>
+				</f:SimpleForm>
+			</FlexBox>
+			<FlexBox justifyContent="End" class="sapUiSmallMargin">
+				<Button id="idOK" text="{i18n>salvar} " press="onSaveProrroga" class="myCustomButton sapUiSmallMarginBegin"/>
+				<Button id="idCancelar" text="{i18n>cancelar}" press="onCancelar" class="myCustomButton sapUiSmallMarginBegin"/>
+			</FlexBox>
+			<Input id="idCotacao" visible="false"/>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>

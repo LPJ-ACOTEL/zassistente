@@ -1,0 +1,33 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog afterOpen="dialogAfteropen" afterClose="dialogAfterclose" title="{i18n>conversao}" contentHeight="35%" contentWidth="35%"
+		escapeHandler="onEscapePress">
+		<content>
+			<VBox class="sapUiSmallMargin">
+				<HBox class="sapUiSmallMargin">
+					<VBox class="sapUiSmallMargin">
+						<Label text="Quantidade"/>
+						<Input id="idQtd"/>
+					</VBox>
+					<VBox class="sapUiSmallMargin">
+						<Label text="UM"/>
+						<Input class="myCustomIc myCustomBord" id="idUm" showValueHelp="true" valueHelpRequest=".onSelectDialogPress"/>
+					</VBox>
+					<VBox class="sapUiSmallMargin">
+						<Label text="Qtd Convertida"/>
+						<Input id="idQtdC" editable="false"/>
+					</VBox>
+					<VBox class="sapUiSmallMargin">
+						<Label text="Um Unidade"/>
+						<Input id="idUMC" editable="false"/>
+					</VBox>
+				</HBox>
+				<HBox class="sapUiSmallMargin" justifyContent="End"></HBox>
+			</VBox>
+		</content>
+		<buttons>
+			<Button type="Transparent" class="myCustomButton2" text="Atribuir" press="onAtribuir"/>
+			<Button type="Transparent" class="myCustomButton2" text="Converter" press="onConverter"/>
+			<Button type="Transparent" class="myCustomButton2" text="Cancelar" press="closeDialog"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,112 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog title="{i18n>dadosadicionais}" beforeOpen="onBeforeDadosAdicionais" afterClose="dialogDadosAdicionaisAfterclose" contentHeight="90%"
+		contentWidth="50%">
+		<content>
+			<FlexBox alignContent="Start" alignItems="Start" class="sapUiSmallMargin">
+				<!--	<f:SimpleForm id="idSimpl01" editable="true" title="{i18n>dadosadicionaiscliente}" labelSpanXL="12" adjustLabelSpan="false" emptySpanXL="0"
+					emptySpanL="0" columnsXL="2" columnsL="2" singleContainerFullSize="false" labelSpanL="12" layout="ResponsiveGridLayout" columnsM="2"
+					labelSpanM="12">
+					-->
+				<f:SimpleForm title="{i18n>dadosadicionaiscliente}" editable="false" layout="ColumnLayout" columnsM="2" columnsL="3" columnsXL="3">
+					<f:content>
+						<Label text="{i18n>certificado}"/>
+						<Input id="idCertificado" change="handlerDadosAdicionais" showValueHelp="true" valueHelpRequest="onSelectDialogPress"/>
+						<Label text="{i18n>limitecarga}"/>
+						<Input id="idLimiteCarga" change="handlerDadosAdicionais" showValueHelp="true" valueHelpRequest="onSelectDialogPress"/>
+						<Label text="{i18n>limiteveiculo}"/>
+						<Input id="idLimiteVeiculo" change="handlerDadosAdicionais" showValueHelp="true" valueHelpRequest="onSelectDialogPress"/>
+						<Label text="{i18n>recebparcial}"/>
+						<Input id="idRecebimento" change="handlerDadosAdicionais" showValueHelp="true" valueHelpRequest="onSelectDialogPress"/>
+						<Label text="{i18n>segmento}"/>
+						<Input id="idSegmento" change="handlerDadosAdicionais" showValueHelp="true" valueHelpRequest="onSelectDialogPress"/>
+						<Label text="{i18n>restricao1}"/>
+						<Input id="idRestricao1" change="handlerDadosAdicionais" showValueHelp="true" valueHelpRequest="onSelectDialogPress"/>
+						<Label text="{i18n>restricao2}"/>
+						<Input id="idRestricao2" change="handlerDadosAdicionais" showValueHelp="true" valueHelpRequest="onSelectDialogPress"/>
+						<Label text="{i18n>restricao3}"/>
+						<Input id="idRestricao3" change="handlerDadosAdicionais" showValueHelp="true" valueHelpRequest="onSelectDialogPress"/>
+						<Label text="{i18n>restricao4}"/>
+						<Input id="idRestricao4" change="handlerDadosAdicionais" showValueHelp="true" valueHelpRequest="onSelectDialogPress"/>
+						<Label text="{i18n>restricao5}"/>
+						<Input id="idRestricao5" change="handlerDadosAdicionais" showValueHelp="true" valueHelpRequest="onSelectDialogPress"/>
+					</f:content>
+				</f:SimpleForm>
+			</FlexBox>
+			<FlexBox alignContent="Start" alignItems="Start" class="sapUiSmallMargin">
+				<f:SimpleForm title="{i18n>locentrega}" editable="false" layout="ColumnLayout" columnsM="2" columnsL="3" columnsXL="3">
+					<f:content>
+						<Label text="{i18n>name}"/>
+						<Input id="idName"/>
+						<Label text="{i18n>cidade}"/>
+						<Input id="idCidade"/>
+						<Label text="{i18n>cep1}" class="marginFlexBox"/>
+						<Input id="idCep"/>
+						<Input id="idUF" width="30%">
+							<layoutData>
+								<l:GridData span="L1 M3 S4"/>
+							</layoutData>
+						</Input>
+						<Label text="{i18n>logadouro}"/>
+						<Input id="idLogadouro"/>
+						<Label text="{i18n>bairro}"/>
+						<Input id="idBairro"/>
+					</f:content>
+				</f:SimpleForm>
+			</FlexBox>
+			<f:Form id="_form09" editable="true">
+				<f:title>
+					<core:Title text="{i18n>textos}"/>
+				</f:title>
+				<f:layout>
+					<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="12" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0"
+						emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="true"/>
+				</f:layout>
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement>
+								<f:fields>
+									<FlexBox direction="Column">
+										<FlexBox renderType="Bare">
+											<Link id="link01" press="handleLinkPress1" text="{i18n>observacoes}" subtle="true" class="sapUiSmallMarginBegin textLabel5 textLabel6"
+												wrapping="true">
+												<layoutData>
+													<FlexItemData growFactor="0"/>
+												</layoutData>
+											</Link>
+											<Link id="link03" press="handleLinkPress3" text="{i18n>horariofuncionamento}" subtle="true"
+												class="sapUiSmallMarginBegin textLabel5 textLabel6" wrapping="true">
+												<layoutData>
+													<FlexItemData growFactor="0"/>
+												</layoutData>
+											</Link>
+											<Link id="link04" press="handleLinkPress4" text="{i18n>horarioentrega}" subtle="true" class="sapUiSmallMarginBegin textLabel5 textLabel6"
+												wrapping="true">
+												<layoutData>
+													<FlexItemData growFactor="0"/>
+												</layoutData>
+											</Link>
+											<Link id="link05" press="handleLinkPress5" text="{i18n>textonota}" subtle="true" class="sapUiSmallMarginBegin textLabel5 textLabel6"
+												wrapping="true">
+												<layoutData>
+													<FlexItemData growFactor="0"/>
+												</layoutData>
+											</Link>
+										</FlexBox>
+										<FlexBox>
+											<TextArea id="idTexto" height="200px" width="700px" class="sapUiSmallMarginBegin"/>
+										</FlexBox>
+										<FlexBox justifyContent="End">
+											<Button id="idOK" text="{i18n>salvar} " press="onSalvarDadosAdicionais" class="myCustomButton sapUiSmallMarginBegin"/>
+											<Button id="idCancelar" text="{i18n>cancelar}" press="onCancelarDadosAdicionais" class="myCustomButton sapUiSmallMarginBegin"/>
+										</FlexBox>
+									</FlexBox>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>

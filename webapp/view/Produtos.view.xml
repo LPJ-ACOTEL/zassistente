@@ -1,0 +1,129 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:semantic="sap.m.semantic" xmlns="sap.m" xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout" controllerName="com.assistente.controller.Produtos">
+	<App>
+		<pages>
+			<Page navButtonPress="_navBack" id="page" enableScrolling="true" class="myCustomHeader">
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" press="onBack" class="textLabel2"/>
+						</contentLeft>
+						<contentRight>
+							<Button class="textLabel2" icon="sap-icon://full-screen" press="onPressMenuButton" visible="{!device>/isTablet} "/>
+						</contentRight>
+						<contentMiddle>
+							<Title level="H2" text="{i18n>produtos}" class="textLabel"/>
+						</contentMiddle>
+					</Bar>
+				</customHeader>
+				<footer >
+						<OverflowToolbar class="sapUiMediumMarginTop">
+							
+							<core:Icon src="sap-icon://customer" class="size5 sapUiSmallMarginBegin myCustomIcone"/>
+							<Text id="idUsuario" text="" class="sapUiTinyMarginBegin textLabel4"/>
+							<Text text=":" class="textLabel4"/>
+							<Text id="nomeUsuario" text="" class="sapUiTinyMargin textLabel4"/>
+							<Text text="{i18n>Loja_}" class="textLabel4"/>
+							<Text id="nomeLoja" text="" class="sapUiTinyMargin textLabel4"/>
+							<ToolbarSpacer/>
+						</OverflowToolbar>
+					</footer>
+				<content>
+					<VBox direction="Column">
+						<f:Form id="_form01" editable="true">
+							<f:layout>
+								<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="12" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0"
+									emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="5" columnsL="5" columnsM="5" singleContainerFullSize="true"/>
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>material}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idMaterial"  placeholder="{i18n>digitematerial}" width="100%" showSuggestion="true" showValueHelp="true"
+														valueHelpRequest="onSelectDialogPress" submit="onSelectDialogPress" change="handleMaterial"> </Input>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>centro}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" change="handleChangeAll" id="idCentro" showValueHelp="true" valueHelpRequest=".onSelectDialogPress" ></Input>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>canal}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" change="handleChangeAll" id="idCanal" showValueHelp="true" valueHelpRequest=".onSelectDialogPress" ></Input>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>grupomercadoria}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" change="handleChangeAll" id="idGrupo" showValueHelp="true" valueHelpRequest=".onSelectDialogPress" ></Input>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="">
+											<f:fields>
+												<VBox height="65px" alignContent="Center" alignItems="Start" direction="Column" justifyContent="Center">
+													<Button class="myCustomButton" text="{i18n>filtrar}" width="100px" id="__button1" press="onFiltrar"/>
+												</VBox>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+					</VBox>
+					<Table id="idProductsTable" inset="false" items="{ path: 'ModelItens>/Itens', sorter: { path: 'ModelItens>/Itens' } }">
+						<headerToolbar></headerToolbar>
+						<columns>
+							<Column >
+								<Text text="{i18n>material}"/>
+							</Column>
+							<Column >
+								<Text text="{i18n>grupomercadoria}"/>
+							</Column>
+							<Column minScreenWidth="Desktop" demandPopin="true">
+								<Text text="{i18n>centro}"/>
+							</Column>
+							<Column minScreenWidth="Desktop" demandPopin="true">
+								<Text text="{i18n>preco}"/>
+							</Column>
+							<Column hAlign="End">
+								<Text text="{i18n>estoque}"/>
+							</Column>
+							<Column >
+								<Text text="{i18n>um}"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem vAlign="Middle">
+								<cells>
+									<ObjectAttribute text="{ModelItens>Material}-{ModelItens>DescMaterial}" class="textItens2"/>
+									<ObjectAttribute text="{ModelItens>GrupoMerc}-{ModelItens>DescGrupo}" class="textItens2"/>
+									<ObjectAttribute text="{ModelItens>Centro}-{ModelItens>DescCentro}" class="textItens2"/>
+									<ObjectAttribute text="{ModelItens>Preco}" class="textItens2"/>
+									<ObjectAttribute text="{ModelItens>Estoque}" class="textItens2" active="true" press="onLinkEstoque"/>
+									<ObjectAttribute text="{ModelItens>Um}" class="textItens2"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

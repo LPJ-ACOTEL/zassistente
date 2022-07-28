@@ -1,0 +1,347 @@
+{
+    "_version": "1.33.0",
+    "sap.app": {
+        "id": "com.assistente",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap-ux/fiori-freestyle-writer:basic",
+            "version": "0.11.6"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/Z_ASSISTENTE_VENDAS_SRV/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            }
+        },
+        
+        "crossNavigation": {
+            "inbounds": {
+                "com-assistente-inbound": {
+                    "signature": {
+                        "parameters": {
+                        },
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "ZASS",
+                    "action": "display",
+                    "title": "{{flpTitle}}",
+                    "subTitle": "{{flpSubtitle}}",
+                    "icon": ""
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "config": {
+            "fullWidth": true
+        },
+        "fullWidth": true,
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.90.7",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "com.assistente.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {}
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "viewPath": "com.assistente.view",
+                "controlId": "idAppControl",
+                "controlAggregation": "detailPages",
+                "bypassed": {
+                    "target": [
+                        "master",
+                        "notFound"
+                    ]
+                },
+                "async": true
+            },
+            "routes": [
+                {
+                    "pattern": "",
+                    "name": "master",
+                    "target": [
+                        "inicio",
+                        "master"
+                    ]
+                },
+                {
+                    "pattern": "MenuSet/{Id}",
+                    "name": "inicio",
+                    "target": [
+                        "master",
+                        "inicio"
+                    ]
+                },
+                {
+                    "pattern": "MenuSet/{Id}",
+                    "name": "object",
+                    "target": [
+                        "master",
+                        "object"
+                    ]
+                },
+                {
+                    "pattern": "produtos",
+                    "name": "produtos",
+                    "target": [
+                        "master",
+                        "produtos"
+                    ]
+                },
+                {
+                    "pattern": "clientescard",
+                    "name": "clientescard",
+                    "target": [
+                        "master",
+                        "clientescard"
+                    ]
+                },
+                {
+                  "pattern": "ordenscards",
+                  "name": "ordenscards",
+                  "target": [
+                    "master",
+                    "ordenscards"
+                ]
+              },
+                {
+                  "pattern": "cotacao/{Id}",
+                  "name": "cotacao",
+                  "target": [
+                    "master",
+                    "cotacao"
+                ]
+              },
+              {
+                "pattern": "ordem/{Id}",
+                "name": "ordem",
+                "target": [
+                    "master",
+                    "ordem"
+                ]
+            },
+            {
+              "pattern": "administracotacao",
+              "name": "administracotacao",
+              "target": [
+                "master",
+                "administracotacao"
+            ]
+          }
+            ],
+            "targets": {
+                "master": {
+                    "viewName": "Master",
+                    "viewLevel": 1,
+                    "viewId": "master",
+                    "controlAggregation": "masterPages",
+                    "routerClass": "sap.m.routing.Router",
+                    "viewType": "XML",
+                    "viewPath": "com.assistente.view",
+                    "controlId": "idAppControl",
+                    "bypassed": {
+                        "target": [
+                            "master",
+                            "notFound"
+                        ]
+                    },
+                    "async": "true"
+                },
+                "object": {
+                    "viewName": "Detail",
+                    "viewId": "detail",
+                    "viewLevel": 2,
+                    "routerClass": "sap.m.routing.Router",
+                    "viewType": "XML",
+                    "viewPath": "com.assistente.view",
+                    "controlId": "idAppControl",
+                    "controlAggregation": "detailPages",
+                    "bypassed": {
+                        "target": [
+                            "master",
+                            "notFound"
+                        ]
+                    },
+                    "async": "true"
+                },
+                "inicio": {
+                    "viewName": "Inicio",
+                    "viewId": "inicio",
+                    "viewLevel": 2,
+                    "routerClass": "sap.m.routing.Router",
+                    "viewType": "XML",
+                    "viewPath": "com.assistente.view",
+                    "controlId": "idAppControl",
+                    "controlAggregation": "detailPages",
+                    "bypassed": {
+                        "target": [
+                            "master",
+                            "notFound"
+                        ]
+                    },
+                    "async": "true"
+                },
+                "detailObjectNotFound": {
+                    "viewName": "DetailObjectNotFound",
+                    "viewId": "detailObjectNotFound",
+                    "routerClass": "sap.m.routing.Router",
+                    "viewType": "XML",
+                    "viewPath": "com.assistente.view",
+                    "controlId": "idAppControl",
+                    "controlAggregation": "detailPages",
+                    "bypassed": {
+                        "target": [
+                            "master",
+                            "notFound"
+                        ]
+                    },
+                    "async": "true"
+                },
+                "detailNoObjectsAvailable": {
+                    "viewName": "DetailNoObjectsAvailable",
+                    "viewId": "detailNoObjectsAvailable",
+                    "routerClass": "sap.m.routing.Router",
+                    "viewType": "XML",
+                    "viewPath": "com.assistente.view",
+                    "controlId": "idAppControl",
+                    "controlAggregation": "detailPages",
+                    "bypassed": {
+                        "target": [
+                            "master",
+                            "notFound"
+                        ]
+                    },
+                    "async": "true"
+                },
+                "notFound": {
+                    "viewName": "NotFound",
+                    "viewId": "notFound",
+                    "routerClass": "sap.m.routing.Router",
+                    "viewType": "XML",
+                    "viewPath": "com.assistente.view",
+                    "controlId": "idAppControl",
+                    "controlAggregation": "detailPages",
+                    "bypassed": {
+                        "target": [
+                            "master",
+                            "notFound"
+                        ]
+                    },
+                    "async": "true"
+                },
+                "produtos": {
+                    "viewId": "produtos",
+                    "viewName": "Produtos",
+                    "viewLevel": 2
+                },
+                "clientescard": {
+                    "viewId": "clientescard",
+                    "viewName": "ClientesCard",
+                    "viewLevel": 2
+                },
+                "ordenscards": {
+                  "viewId": "ordenscards",
+                  "viewName": "OrdensCard",
+                  "viewLevel": 2
+              },
+               
+              "cotacao": {
+                "viewType": "XML",
+                "viewName": "Cotacao",
+                "viewId": "cotacao",
+                "viewLevel": 3,
+                "routerClass": "sap.m.routing.Router",
+                "viewPath": "com.assistente.view",
+                "controlId": "idAppControl",
+                "controlAggregation": "detailPages",
+                "bypassed": {
+                    "target": [
+                        "master",
+                        "notFound"
+                    ]
+                },
+                "async": "true"
+            },
+              "ordem": {
+                "viewId": "ordem",
+                "viewName": "Ordem",
+                "viewLevel": 3
+            },
+            "administracotacao": {
+              "viewId": "administracotacao",
+              "viewName": "AdministraCotacao",
+              "viewLevel": 3
+          }
+            }
+        },
+          "rootView": {
+            "viewName": "com.assistente.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+          }
+        }
+      }
+      

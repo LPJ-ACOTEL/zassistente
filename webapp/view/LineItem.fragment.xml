@@ -1,0 +1,56 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog beforeOpen="dialogItemAfteropen" afterClose="dialogItemAfterclose" contentHeight="75%" contentWidth="60%"
+		escapeHandler="onEscapePress">
+		<VBox>
+			<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="12" labelSpanL="12" labelSpanM="12" labelSpanS="12"
+				adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="6" columnsL="6" columnsM="6"
+				singleContainerFullSize="false">
+				<f:content>
+					<core:Title text="{i18n>dados}"/>
+					<Label text="{i18n>lote}"/>
+					<Input id="idLote" width="100%"/>
+					<core:Title text=""/>
+					<Label text="{i18n>datadesejada}"/>
+					<DatePicker id="idDataDesejada" class="myCustomIc myCustomBord" displayFormat="short" change="handleChange" width="100%"/>
+					<core:Title text=""/>
+					<Label text="{i18n>dataconfirmada}"/>
+					<DatePicker id="idDataConfirmada" class="myCustomIc myCustomBord" displayFormat="short" change="handleChange" width="100%"/>
+					<core:Title text=""/>
+					<Label text="{i18n>perda}"/>
+					<Input class="myCustomIc myCustomBord" id="idPerda" width="100%" change="handlePerda" />
+					<core:Title text=""/>
+					<Label text="{i18n>motivodrecusa}"/>
+					<Input visible="false" class="myCustomIc myCustomBord" id="idMotivoRecusaItem" change="handlerDadosAdicionais" showValueHelp="true"
+						valueHelpRequest=".onSelectDialogPress" width="100%"/>
+				</f:content>
+			</f:SimpleForm>
+			
+				
+
+		<!-- 	<f:SimpleForm visible="false" editable="true" layout="ResponsiveGridLayout" labelSpanXL="12" labelSpanL="12" labelSpanM="12" labelSpanS="12"
+				adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+				singleContainerFullSize="false">
+				<f:content >
+					<core:Title text="{i18n>info}" />
+					<TextArea id="idLocal"  value="{/InputValue}" valueLiveUpdate="{/ValueLiveUpdate}" liveChange="handleLiveChange" height="150px"/>
+				</f:content>
+			</f:SimpleForm>
+-->
+			
+		</VBox>
+
+		<FlexBox>							
+		   <Link id="link10" text="{i18n>info}" subtle="true" class="sapUiSmallMarginBegin textLabel5 textLabel6" press="onPressLinkLineItem10" />
+		   <Link id="link20" text="{i18n>plano}" subtle="true" class="sapUiSmallMarginBegin textLabel5 textLabel6" press="onPressLinkLineItem20" />				
+		</FlexBox>
+
+		<TextArea  class="sapUiSmallMarginBegin" id="idLocal"   value="{/InputValue}" valueLiveUpdate="{/ValueLiveUpdate}" liveChange="handleLiveChange"   width="80%" height="200px"/>
+        <TextArea  class="sapUiSmallMarginBegin" id="idPlano"   value="{/InputValue}" valueLiveUpdate="{/ValueLiveUpdate}" liveChange="handleLiveChange" width="80%" height="200px"/>
+
+
+		<buttons>
+			<Button type="Transparent" id="idOkLine" class="myCustomButton2" text="{i18n>ok}" press="onAtribuirItem"/>
+			<Button type="Transparent" text="{i18n>cancelar}" class="myCustomButton2" press="closeDialogItem"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,45 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog beforeOpen="beforeFluxo" afterClose="afterCloseFluxo" contentHeight="30%" contentWidth="40%">
+		<Table id="idFluxo" inset="false" items="{ path: 'ModelFluxo>/Itens' }">
+			<columns>
+				<Column >
+					<Text text="{i18n>cotacao}" class="textItens"/>
+				</Column>
+				<Column minScreenWidth="Desktop" demandPopin="true">
+					<Text text="{i18n>item}" class="textItens"/>
+				</Column>
+				<Column minScreenWidth="Desktop" demandPopin="true">
+					<Text text="{i18n>ordem}" class="textItens"/>
+				</Column>
+				<Column minScreenWidth="Desktop" demandPopin="true">
+					<Text text="{i18n>itemvenda}" class="textItens"/>
+				</Column>
+				<Column minScreenWidth="Desktop" demandPopin="true">
+					<Text text="{i18n>remessa}" class="textItens"/>
+				</Column>
+				<Column minScreenWidth="Desktop" demandPopin="true">
+					<Text text="{i18n>fatura}" class="textItens"/>
+				</Column>
+				<Column minScreenWidth="Desktop" demandPopin="true">
+					<Text text="{i18n>Nf}" class="textItens"/>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem vAlign="Middle" class="textItens2">
+					<cells>
+						<ObjectIdentifier title="{ModelFluxo>Cotacao}"/>
+						<ObjectAttribute text="{path: 'ModelFluxo>ItemCotacao', formatter: '.formatter.retiraZeroEsquerda'}"/>
+						<ObjectAttribute text="{ModelFluxo>OrdemVenda}" class="textItens2"/>
+						<ObjectAttribute text="{path: 'ModelFluxo>ItemVenda', formatter: '.formatter.retiraZeroEsquerda'}"/>
+						<ObjectAttribute text="{ModelFluxo>Remessa}" class="textItens2"/>
+						<ObjectAttribute text="{ModelFluxo>Fatura}" class="textItens2"/>
+						<ObjectAttribute text="{path: 'ModelFluxo>NotaFiscal', formatter: '.formatter.retiraZeroEsquerda'}"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<buttons>
+			<Button type="Transparent" text="{i18n>cancelar}" class="myCustomButton2" press="closeDialogFluxo"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

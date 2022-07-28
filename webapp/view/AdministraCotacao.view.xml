@@ -1,0 +1,242 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:semantic="sap.m.semantic" xmlns="sap.m" xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout" controllerName="com.assistente.controller.AdministraCotacao">
+	<App>
+		<pages>
+			<Page navButtonPress="_navBack" id="page" enableScrolling="true" class="myCustomHeader">
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" press="onBack" class="textLabel2"/>
+						</contentLeft>
+						<contentRight>
+						    <Button icon="sap-icon://detail-view" press="onFluxo" class="textLabel2"/>
+							<Button class="textLabel2" icon="sap-icon://full-screen" press="onPressMenuButton" visible="{!device>/isTablet} "/>
+						</contentRight>
+						<contentMiddle>
+							<Title level="H2" text="{i18n>administracotacao}" class="textLabel"/>
+						</contentMiddle>
+					</Bar>
+				</customHeader>
+				<footer>
+					<OverflowToolbar class="sapUiMediumMarginTop">
+						
+						<core:Icon src="sap-icon://customer" class="size5 sapUiSmallMarginBegin myCustomIcone"/>
+						<Text id="idUsuario" text="" class="sapUiTinyMarginBegin textLabel4"/>
+						<Text text=":" class="textLabel4"/>
+						<Text id="nomeUsuario" text="" class="sapUiTinyMargin textLabel4"/>
+						<Text text="{i18n>Loja_}" class="textLabel4"/>
+						<Text id="nomeLoja" text="" class="sapUiTinyMargin textLabel4"/>
+						<ToolbarSpacer/>
+						<ToolbarSpacer/>
+						<Button type="Transparent" text="{i18n>faturar}" press="onFatura" class="myCustomButton2 sapUiSmallMarginBegin"/>
+						<Button type="Transparent" text="{i18n>criarcotacao}" press="onCriarCotacao" class="myCustomButton2 sapUiSmallMarginBegin"/>
+						<Button type="Transparent" text="{i18n>criarov}" press="onCriarOV" class="myCustomButton2 sapUiSmallMarginBegin"/>
+						<Button type="Transparent" text="{i18n>prorrogarvalidade} " press="onProrrogaValidade" class="myCustomButton2 sapUiSmallMarginBegin"/>
+						<Button type="Transparent" text="{i18n>convertercotacao}" press="onConverter" class="myCustomButton2 sapUiSmallMarginBegin"/>
+					</OverflowToolbar>
+				</footer>
+				<content>
+					<VBox direction="Column">
+						<f:Form id="_form01" editable="true">
+							<f:layout>
+								<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="12" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0"
+									emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="6" columnsL="6" columnsM="6" singleContainerFullSize="true"/>
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>cotacao}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idCotacao" type="Text" placeholder="{i18n>digitecod}" width="100%" showSuggestion="true"
+													showValueHelp="true" valueHelpRequest="onSelectDialogPress" submit="onSelectDialogPress" fieldWidth="100%"></Input>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>centro}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idCentro" change="handleChangeAll" showValueHelp="true" valueHelpRequest=".onSelectDialogPress"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>cliente}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idCliente" type="Text" placeholder="{i18n>digiteemissor}" width="100%" showSuggestion="true"
+													showValueHelp="true" valueHelpRequest="onSelectDialogPress" submit="onSelectDialogPress" change="handleChangeAll" fieldWidth="100%"></Input>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>canal}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idCanal" change="handleChangeAll" showValueHelp="true" valueHelpRequest=".onSelectDialogPress"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>vendedor}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idVendedor" type="Text" placeholder="{i18n>digiteemissor}" width="100%" showSuggestion="true"
+													showValueHelp="true" valueHelpRequest="onSelectDialogPress" submit="onSelectDialogPress" change="handleChangeAll" fieldWidth="100%"></Input>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>criadopor}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idCriado"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>pedidocliente}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idPedido"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>motivorecusa}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idMotivo" change="handleChangeAll" showValueHelp="true" valueHelpRequest=".onSelectDialogPress"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>ordemv}">
+											<f:fields>
+												<Input class="myCustomIc myCustomBord" id="idOrdem" type="Text" placeholder="{i18n>digitecod}" width="100%" showSuggestion="true"
+													showValueHelp="true" valueHelpRequest="onSelectDialogPress" submit="onSelectDialogPress" fieldWidth="100%"></Input>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>datavalidade}">
+											<f:fields>
+												<DatePicker class="myCustomIc myCustomBord" id="idDataDe" valueStateText="{i18n>obrigatorio}" displayFormat="short" width="100%"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+									<f:formElements>
+										<f:FormElement label="{i18n>ate}">
+											<f:fields>
+												<DatePicker class="myCustomIc myCustomBord" id="idDataAte" valueFormat="dd/MM/yyyy" displayFormat="short" width="100%"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>datacriacao}">
+											<f:fields>
+												<DatePicker class="myCustomIc myCustomBord" id="idCriadoDe" valueStateText="{i18n>obrigatorio}" displayFormat="short" width="100%"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+									<f:formElements>
+										<f:FormElement label="{i18n>ate}">
+											<f:fields>
+												<DatePicker class="myCustomIc myCustomBord" id="idCriadoAte" displayFormat="short" width="100%"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="">
+											<f:fields>
+												<VBox height="65px" alignContent="Center" alignItems="Start" direction="Column" justifyContent="Center">
+													<Button class="myCustomButton" text="{i18n>filtrar}" width="100px" id="__button1" press="onFiltrar"/>
+												</VBox>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+					</VBox>
+					<Table id="idLista" mode="SingleSelectMaster" inset="false"
+						items="{ path: 'ModelItens>/Itens', sorter: { path: 'Cotacao', descending: true } }">
+						<headerToolbar>
+							<OverflowToolbar>
+								
+								<ComboBox id="combobox1"
+									items="{
+										path: 'ModelFilter>/Itens',
+										sorter: { path: 'name' }
+									}">
+									<core:Item key="{ModelFilter>key}" text="{ModelFilter>name}" />
+								</ComboBox>
+
+								<SearchField search="onSearch" width="17.5rem"/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column width="8em">
+								<Text text="{i18n>cotacao}"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>validade}"/>
+							</Column>
+							<Column minScreenWidth="Desktop" demandPopin="true">
+								<Text text="{i18n>statuscotacao}"/>
+							</Column>
+							<Column minScreenWidth="Desktop" demandPopin="true">
+								<Text text="{i18n>cliente}"/>
+							</Column>
+							<Column minScreenWidth="Desktop" demandPopin="true">
+								<Text text="{i18n>vendedor}"/>
+							</Column>
+							<Column minScreenWidth="Desktop" demandPopin="true">
+								<Text text="{i18n>qtdkg}"/>
+							</Column>
+							<Column minScreenWidth="Desktop" demandPopin="true">
+								<Text text="{i18n>valorreal}"/>
+							</Column>
+							<Column minScreenWidth="Desktop" demandPopin="true">
+								<Text text="{i18n>numov}"/>
+							</Column>
+							<Column minScreenWidth="Desktop" demandPopin="true">
+								<Text text="{i18n>statusov}"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem vAlign="Middle">
+								<cells>
+									<ObjectAttribute text="{ModelItens>Cotacao}" active="true" press="onLinkCotacao"/>
+									<Text text="{ModelItens>DataValidade}"/>
+									<Text text="{ModelItens>StatusCotacao}"/>
+									<Text text="{ModelItens>Cliente}"/>
+									<Text text="{ModelItens>Vendedor}"/>
+									<Text text="{ModelItens>Qtd}"/>
+									<Text text="{ModelItens>Valor}"/>
+									<ObjectAttribute text="{ModelItens>Ordem}" active="true" press="onLinkOrdem"/>
+									<Text text="{ModelItens>StatusOrdem}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

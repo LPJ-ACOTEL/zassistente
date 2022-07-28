@@ -1,0 +1,22 @@
+<core:FragmentDefinition xmlns="sap.m" 
+xmlns:l="sap.ui.layout" 
+xmlns:f="sap.ui.layout.form" 
+xmlns:core="sap.ui.core">
+	<Dialog beforeOpen="beforeDialogDinamico" 
+			afterOpen="afterOpenDialogDinamico"
+	afterClose="afterDialogDinamico" contentHeight="75%" contentWidth="60%"
+		escapeHandler="onEscapePress">
+        <Table id="idMyTable" class="sapUiSmallMarginTop" mode="MultiSelect"
+         inset="false" growing="true" growingScrollToLoad="true" updateFinished="onUpdateFinished">
+		 <headerToolbar>
+	      <Toolbar>
+	        <Button id="idRemov" icon="sap-icon://delete" text="{i18n>eliminar}" press="onRemoveDinamico" class="myCustomButton"/>
+		  </Toolbar>
+	     </headerToolbar>
+        </Table>
+		<buttons>
+			<Button type="Transparent" id="idOkLine" class="myCustomButton2" text="{i18n>ok}" press="onAtribuirCaracteristica"/>
+			<Button type="Transparent" text="{i18n>cancelar}" class="myCustomButton2" press="closeDialogDinamico"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>
