@@ -1,6 +1,6 @@
 sap.ui.define(
 	[
-		"sap/ui/core/mvc/Controller",
+		"com/assistente/controller/BaseController",//"sap/ui/core/mvc/Controller",
 		"sap/m/MessageToast",
 		"sap/ui/model/json/JSONModel",
 		"sap/ui/core/Fragment",
@@ -14,7 +14,7 @@ sap.ui.define(
 		"com/assistente/model/formatter",
 		"sap/m/MessageBox",
 		"sap/ui/core/routing/History",
-		"sap/ui/core/library",
+		"sap/ui/core/library"
 	],
 	function(
 		BaseController,
@@ -194,6 +194,21 @@ sap.ui.define(
 							count = count + 1;
 						}
 					);
+
+					Results.buscaCondPag().then(
+						function(data) {
+							var oData = {};
+							var oModelSearch = new JSONModel();
+							oData.Itens = data;
+							oModelSearch.setData(oData);
+							this_.getView().setModel(oModelSearch, "idCondPagto");
+							count = count + 1;
+						},
+						function(error) {
+							count = count + 1;
+						}
+					);					
+
 				},
 
 				preenchimentoAutomatico: function(this_) {
@@ -1378,6 +1393,40 @@ sap.ui.define(
 					}
 		
 					this.getView().byId("idLista").getBinding("items").filter(oTableSearchState, "Application");
+				},
+
+				onPagamento: function(oEvent){
+
+					var sPath,
+						sPedidos = '';
+
+					var valoresSelecionados = this.byId("idLista").getSelectedContexts();
+					if (valoresSelecionados.length === 0) {
+						MessageBox.alert("Favor Selecionar a linha");
+						return;
+					}
+
+					valoresSelecionados.map(function(resultItem) {
+						var sPatch = resultItem.sPath;
+						var oSource = oEvent.getSource();
+						var oModelOrig = oSource.getModel("ModelItens");
+						var oRow = oModelOrig.getProperty(sPatch);
+						
+						if(!!oRow.Cotacao)
+							sPedidos += ';' + oRow.Cotacao
+					});
+
+					sPath = "/PagamentoSet('" + sPedidos.substring(1) + "')";
+
+					Results.buscaPagamento(sPath).then(
+						function(data) {
+							this._showCondPagto(data);
+						}.bind(this),
+						function(error) {
+							var sMsg = JSON.parse(error.responseText);
+							this._showMessageError(sMsg);
+						}.bind(this)
+					);
 				}
 				
 			},

@@ -1,0 +1,63 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+	xmlns:c="sap.ui.core">
+
+  <Dialog
+  		title="{i18n>labelCondPagto7}"
+	    type="Message"
+	    draggable="true"
+	    contentWidth="auto"
+	    contentHeight="auto">
+
+        <content>
+            <VBox alignContent="Center"
+                  alignItems="Center"
+                  fitContainer="true">
+
+ 						<f:SimpleForm layout="ResponsiveGridLayout" 
+							labelSpanXL="12"
+							labelSpanL="12" 
+							labelSpanM="12" 
+							labelSpanS="12"
+							adjustLabelSpan="false" 
+							emptySpanXL="4" 
+							emptySpanL="4"
+							emptySpanM="4"
+							emptySpanS="0" 
+							columnsXL="1" 
+							columnsL="1"
+							columnsM="1" 
+							singleContainerFullSize="false">
+							<f:content>
+								<Label text="{i18n>labelCondPagto6}" />
+								<ComboBox id="ID_SELECT_COND_PAGTO"
+									items="{
+										path: 'idCondPagto>/Itens'
+									}"
+                                    showSecondaryValues= "true">
+									<c:ListItem key="{idCondPagto>cod}" text="{idCondPagto>desc}" additionalText = "{idCondPagto>cod}"/>
+								</ComboBox>
+							</f:content>
+						</f:SimpleForm>	               
+
+            </VBox>
+        </content>
+        <buttons>
+            <Button 
+                    text="{i18n>selecionar}" 
+                    type="Accept" 
+                    icon="sap-icon://accept" 
+                    press="onHandleAcceptSelectCondPagto" />
+
+            <Button 
+                    text="{i18n>cancelar}" 
+                    type="Reject" 
+                    icon="sap-icon://sys-cancel" 
+                    press="onHandleCancelarSelectCondPagto" />
+        </buttons>
+
+    </Dialog>
+
+
+</c:FragmentDefinition>

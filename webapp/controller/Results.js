@@ -2635,7 +2635,63 @@ sap.ui.define(
 						},
 					});
 				});
+			},			
+
+			buscaPagamento: function(sPath) {
+				return new Promise(function(resolve, reject) {
+					var sUrl = "/sap/opu/odata/SAP/Z_ASSISTENTE_VENDAS_SRV/";
+					var oModel = new sap.ui.model.odata.v2.ODataModel(sUrl);
+					oModel.setUseBatch(false);
+
+					oModel.read(sPath, {
+						success: function(oData) {
+							var dataToReturn;
+
+							dataToReturn = { 
+									  Pedidos: oData.Pedidos,
+									  Cliente: oData.Cliente,
+									  Valor: oData.Valor,
+									  ItemsVenda: JSON.parse(oData.ItemsVenda),
+									  ItemsCondPagto: JSON.parse(oData.ItemsCondPagto),
+									  ValorTotal: oData.ValorTotal
+									};
+
+							resolve(dataToReturn);
+						},
+						error: function(err) {
+							reject(err);
+						},
+					});
+				});
 			},
+
+			recalculaPagamento: function(sPath, oDados) {
+				return new Promise(function(resolve, reject) {
+					var sUrl = "/sap/opu/odata/SAP/Z_ASSISTENTE_VENDAS_SRV/";
+					var oModel = new sap.ui.model.odata.v2.ODataModel(sUrl);
+					oModel.setUseBatch(false);
+
+					oModel.create(sPath, oDados, {
+						success: function(oData, oResponse) {
+							var dataToReturn;
+
+							dataToReturn = { 
+									  Pedidos: oData.Pedidos,
+									  Cliente: oData.Cliente,
+									  Valor : oData.Valor,
+									  ItemsVenda: JSON.parse(oData.ItemsVenda),
+									  ItemsCondPagto: JSON.parse(oData.ItemsCondPagto),
+									  ValorTotal: oData.ValorTotal
+									};
+
+							resolve(dataToReturn);
+						},
+						error: function(err) {
+							reject(err);
+						},
+					});
+				});
+			}			
 
 		};
 	}

@@ -28,6 +28,7 @@
 						<Text id="nomeLoja" text="" class="sapUiTinyMargin textLabel4"/>
 						<ToolbarSpacer/>
 						<ToolbarSpacer/>
+						<Button type="Transparent" text="{i18n>efetuaPagto}" press="onPagamento" class="myCustomButton2 sapUiSmallMarginBegin"/>
 						<Button type="Transparent" text="{i18n>faturar}" press="onFatura" class="myCustomButton2 sapUiSmallMarginBegin"/>
 						<Button type="Transparent" text="{i18n>criarcotacao}" press="onCriarCotacao" class="myCustomButton2 sapUiSmallMarginBegin"/>
 						<Button type="Transparent" text="{i18n>criarov}" press="onCriarOV" class="myCustomButton2 sapUiSmallMarginBegin"/>
@@ -174,7 +175,7 @@
 							</f:formContainers>
 						</f:Form>
 					</VBox>
-					<Table id="idLista" mode="SingleSelectMaster" inset="false"
+					<Table id="idLista" mode="MultiSelect" inset="false"
 						items="{ path: 'ModelItens>/Itens', sorter: { path: 'Cotacao', descending: true } }">
 						<headerToolbar>
 							<OverflowToolbar>

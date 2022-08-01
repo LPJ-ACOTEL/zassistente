@@ -1,0 +1,233 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:layout="sap.ui.layout">
+
+  <Dialog
+  		title="{i18n>titleDialogPagto}"
+	    type="Message"
+	    stretchOnPhone="true"
+	    draggable="true"
+	    contentWidth="100%"
+	    contentHeight="100%">
+	    
+    <content>  
+
+			<layout:Grid
+				defaultSpan="L12 M12 S12">
+				
+				<layout:content>
+					
+				<Panel headerText="{i18n>titleCondPagto}">
+					<content>
+
+                        <Table  id="IdTableConditions"
+								items="{ModelPedido>/ItemsCondPagto}"
+								mode="MultiSelect">
+
+							<headerToolbar>
+								<Toolbar>
+									<content>
+										<ToolbarSpacer />
+										<Button id="ID_ADD_LINE" tooltip="{i18n>tooltipButton1}" icon="sap-icon://add"  press="onHandleTablePagtoPress"/>
+										<Button id="ID_REMOVE_LINE" tooltip="{i18n>tooltipButton2}" icon="sap-icon://less" press="onHandleTablePagtoPress"/>
+										<ToolbarSeparator/>
+										<Button id="ID_CALC_LINE" tooltip="{i18n>tooltipButton3}" icon="sap-icon://simulate" press="onHandleTablePagtoPress"/>
+
+									</content>
+								</Toolbar>
+							</headerToolbar>								
+
+                            <columns>
+                                <Column id="ZtermColumnId" hAlign="Left">
+                                    <Text text="{i18n>titleColumnPagto1}" />
+                                </Column>  
+                                
+                                <Column id="ValorColumnId"
+										hAlign="Center">
+                                    <Text text="{i18n>titleColumnPagto2}" />
+                                </Column>    
+
+								<Column id="NumParcColumnId"
+										hAlign="Center">
+                                    <Text text="{i18n>titleColumnPagto3}" />
+                                </Column>    
+								
+								<Column id="DescontoColumnId"
+									 	hAlign="Center">
+                                    <Text text="{i18n>titleColumnPagto4}" />
+                                </Column>     
+								
+								<Column id="TaxaColumnId"
+										hAlign="Right">
+                                    <Text text="{i18n>titleColumnPagto5}" />
+                                </Column>    
+								
+								<Column id="ValorTotalColumnId"
+										hAlign="Right">
+                                    <Text text="{i18n>titleColumnPagto6}" />
+                                </Column>               
+                            </columns>
+
+                            <items>
+                                <ColumnListItem>
+
+                                    <cells>	
+											<ObjectIdentifier
+													title="{ModelPedido>zterm}"
+													text="{ModelPedido>vtext}"/>
+
+											<Input value="{
+														path: 'ModelPedido>valor',
+														type: 'sap.ui.model.type.Float',                                                                     
+														formatOptions: {
+																			groupingEnabled: true, 
+																			groupingSeparator: '.', 
+																			decimalSeparator : ',', 
+																			minFractionDigits: 2
+																		}
+													}" 
+													editable="{modelEditPagto>/value}"/>	
+
+											<Text text="{
+														path:'ModelPedido>num_parc',
+														type: 'sap.ui.model.type.Integer',
+														formatOptions: {showMeasure: false}
+													}"/>
+
+											<Input value="{
+														path: 'ModelPedido>desconto',
+														type: 'sap.ui.model.type.Float',                                                                     
+														formatOptions: {
+																			groupingEnabled: true, 
+																			groupingSeparator: '.', 
+																			decimalSeparator : ',', 
+																			minFractionDigits: 2
+																		}
+													}"
+													editable="{modelEditPagto>/value}"/>	
+
+											<ObjectNumber
+												number="{
+														path: 'ModelPedido>taxa',
+														type: 'sap.ui.model.type.Float',                                                                     
+														formatOptions: {
+																			groupingEnabled: true, 
+																			groupingSeparator: '.', 
+																			decimalSeparator : ',', 
+																			minFractionDigits: 2
+																		}
+													}"
+												unit="%" />
+
+											<ObjectNumber
+												number="{
+														path: 'ModelPedido>valor_total',
+														type: 'sap.ui.model.type.Float',                                                                     
+														formatOptions: {
+																			groupingEnabled: true, 
+																			groupingSeparator: '.', 
+																			decimalSeparator : ',', 
+																			minFractionDigits: 2
+																		}
+													}"
+												unit="BRL" />
+                                            
+                                    </cells>
+
+                                </ColumnListItem>
+			            	</items>
+                        </Table>
+
+					</content>
+					<layoutData>
+						<layout:GridData span="XL8 L8 M8 S12" />
+					</layoutData>
+				</Panel>	
+
+				<Panel headerText="{i18n>titleDetailsVenda}"
+					   expandable="true">
+					<content>
+						<f:SimpleForm layout="ResponsiveGridLayout" 
+							labelSpanXL="12"
+							labelSpanL="12" 
+							labelSpanM="12" 
+							labelSpanS="12"
+							adjustLabelSpan="false" 
+							emptySpanXL="4" 
+							emptySpanL="4"
+							emptySpanM="4"
+							emptySpanS="0" 
+							columnsXL="1" 
+							columnsL="1"
+							columnsM="1" 
+							singleContainerFullSize="false">
+							<f:content>
+								<Label text="{i18n>labelCondPagto2}" />
+								<Text text="{ModelPedido>/Pedidos}" />
+
+								<Label text="{i18n>labelCondPagto3}" />
+								<Text text="{ModelPedido>/Cliente}" />
+
+								<Label text="{i18n>labelCondPagto1}" />
+								<ObjectNumber
+										number="{
+												path: 'ModelPedido>/Valor',
+												type: 'sap.ui.model.type.Float',                                                                     
+												formatOptions: {
+																	groupingEnabled: true, 
+																	groupingSeparator: '.', 
+																	decimalSeparator : ',', 
+																	minFractionDigits: 2
+																}
+												}"
+										unit="BRL" />
+							</f:content>
+						</f:SimpleForm>	
+
+						<List
+							id="IdProductList"
+							headerText="{i18n>titleTableItensPagto}"
+							items="{ModelPedido>/ItemsVenda}">
+							<StandardListItem
+								title="{ModelPedido>arktx}"
+								description="{ModelPedido>vbeln}-{ModelPedido>posnr}"
+								icon="sap-icon://product"
+								info="{ModelPedido>kwmeng} {ModelPedido>vrkme}"
+								infoState="Success"
+								iconDensityAware="false" />
+						</List>					
+					</content>
+					<layoutData>
+						<layout:GridData span="XL4 L4 M4 S12" />
+					</layoutData>
+				</Panel>
+
+				</layout:content>
+			</layout:Grid>
+
+    </content>
+    <buttons>
+
+	    <Button 
+	    		text="{i18n>efetuaPagto}" 
+				type="Accept" 
+	    		icon="sap-icon://money-bills" 
+	    		press="onHandleEfetuarCondPagto" />	
+
+	    <Button 
+	    		text="{i18n>Alterar}" 
+	    		icon="sap-icon://edit" 
+	    		press="onHandleAlterarCondPagto" />
+
+	    <Button 
+	    		text="{i18n>cancelar}" 
+	    		type="Reject" 
+	    		icon="sap-icon://sys-cancel" 
+	    		press="onHandleCancelarCondPagto" />
+    </buttons>
+  </Dialog>
+
+
+</c:FragmentDefinition>
