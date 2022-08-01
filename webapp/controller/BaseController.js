@@ -122,10 +122,26 @@ sap.ui.define([
 		},
 
 		onHandleCancelarCondPagto: function(oEvent){
-			this._oDialogCondPagto.destroy();
-			this._oDialogCondPagto = null;
+
+			MessageBox.confirm("Confirma o cancelamento? Os dados inseridos na tela serão perdidos.", {
+                "title": "Confirmação",
+				"actions": [MessageBox.Action.YES, MessageBox.Action.NO],
+                "emphasizedAction": MessageBox.Action.NO,
+                "onClose": this.onHandleCloseConfirmacao.bind(this)
+            });
 		},
 		
+		onHandleCloseConfirmacao: function (oEvent) {
+			
+			if (oEvent == MessageBox.Action.NO) {
+				return;
+			}
+			
+			this._oDialogCondPagto.destroy();
+			this._oDialogCondPagto = null;
+
+		},
+
 		onHandleTablePagtoPress: function(oEvent){
 			var oId = oEvent.getSource().getId(),
 				oModel = this.getView().getModel("ModelPedido"),
