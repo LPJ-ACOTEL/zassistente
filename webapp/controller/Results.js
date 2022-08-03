@@ -2691,7 +2691,24 @@ sap.ui.define(
 						},
 					});
 				});
-			}			
+			},
+			
+			eliminaFaturamento: function(sPath, oDados) {
+				return new Promise(function(resolve, reject) {
+					var sUrl = "/sap/opu/odata/SAP/Z_ASSISTENTE_VENDAS_SRV/";
+					var oModel = new sap.ui.model.odata.v2.ODataModel(sUrl);
+					oModel.setUseBatch(false);
+
+					oModel.remove(sPath, {
+						success: function(oData, oResponse) {
+							resolve(oData);
+						},
+						error: function(err) {
+							reject(err);
+						},
+					});
+				});
+			}				
 
 		};
 	}

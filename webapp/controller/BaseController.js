@@ -233,6 +233,18 @@ sap.ui.define([
 			if(!oModel.getProperty("/value"))
 				return;
 
+			var	oDataModel = this.getView().getModel("ModelPedido"),
+				sPath = "/PagamentoSet('" + oDataModel.getProperty("/Pedidos")  + "')";
+
+			Results.eliminaFaturamento(sPath).then(
+					function(data) {
+						console.log(data);
+					}.bind(this),
+				function(error) {
+						console.log(error);
+				}.bind(this)
+			);
+
 		},
 
 		onHandleEfetuarCondPagto: function(oEvent){

@@ -29,6 +29,7 @@
 						<ToolbarSpacer/>
 						<ToolbarSpacer/>
 						<ToolbarSpacer/>
+						<Button type="Transparent" id="idPagto" text="{i18n>efetuaPagto}" press="onPagamento" class="myCustomButton2 sapUiSmallMarginBegin"/>
 						<Button type="Transparent" id="idConfigurar" text="{i18n>configurar}" press="onConfigurar" class="myCustomButton2 sapUiSmallMarginBegin"/>
 						<Button type="Transparent" id="idModificar" text="{i18n>modificar}" press="onModificar" class="myCustomButton2 sapUiSmallMarginBegin"/>
 						<Button type="Transparent" id="idDadosAdicionais" text="{i18n>dadosadicionaiscliente}" press="onDadosAdicionais"

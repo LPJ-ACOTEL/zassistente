@@ -1,6 +1,6 @@
 sap.ui.define(
   [
-    "sap/ui/core/mvc/Controller",
+    "com/assistente/controller/BaseController", //"sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/IconPool",
     "sap/m/Dialog",
@@ -222,7 +222,9 @@ sap.ui.define(
             //this.getView().byId("idBloqueioElement").setVisible(true);
             this.getView().byId("idModificar").setVisible(true);
             this.getView().byId("idModificar").setEnabled(true);
+            this.getView().byId("idPagto").setVisible(true);
             stateView = "VISUALIZA";
+            this.gDocumento = gDocumento;
 
             if (vOrdem.length > 1) {
               gRef = vOrdem[0];
@@ -232,6 +234,7 @@ sap.ui.define(
               //this.getView().byId("idBloqueio").setVisible(false);
               //this.getView().byId("idBloqueioElement").setVisible(false);
               this.getView().byId("idModificar").setVisible(false);
+              this.getView().byId("idPagto").setVisible(false);
 
               this.getView().setBusy(true);
               this.buscaDadosCotacao(vOrdem[0], "B");
@@ -245,6 +248,7 @@ sap.ui.define(
             //this.getView().byId("idBloqueio").setVisible(false);
             //this.getView().byId("idBloqueioElement").setVisible(false);
             this.getView().byId("idModificar").setVisible(false);
+            this.getView().byId("idPagto").setVisible(false);
           }
 
           if (stateView === "CRIA") {
@@ -5719,6 +5723,22 @@ sap.ui.define(
           this.getOwnerComponent().getRouter().navTo("master");
         }
       },
+
+      onPagamento: function(oEvent){
+        var sPath = "/PagamentoSet('" + this.gDocumento + "')";
+
+        Results.buscaPagamento(sPath).then(
+          function(data) {
+            this._showCondPagto(data);
+          }.bind(this),
+          function(error) {
+            var sMsg = JSON.parse(error.responseText);
+            this._showMessageError(sMsg);
+          }.bind(this)
+        );
+      }
+
+
     });
   }
 );
